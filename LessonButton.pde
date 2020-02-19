@@ -34,8 +34,9 @@ class LessonButton {
     
     image(lesson.icon, position.x + (hbuttonWidth - buttonHeight), position.y - hbuttonHeight, buttonHeight, buttonHeight);
     
-    lesson.soundButton.position.x = position.x + hbuttonWidth;
-    lesson.soundButton.position.y = position.y - hbuttonWidth;
+    lesson.soundButton.position.x = position.x + (hbuttonWidth + lesson.soundButton.hbuttonSize);
+    lesson.soundButton.position.y = position.y - (hbuttonHeight + lesson.soundButton.hbuttonSize);
+    lesson.soundButton.display();
     
     if (lesson.finished) {
       image(finishedImg, position.x + (hbuttonWidth - dpadding), position.y + (hbuttonHeight - dpadding), 64, 64);
@@ -46,6 +47,7 @@ class LessonButton {
     if (mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + hbuttonWidth && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {
       parent.shown = false;
       lesson.shown = true;
+      isHomepage = false;
     }
   }
 }

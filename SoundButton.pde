@@ -1,7 +1,7 @@
 class SoundButton {
   SoundFile audioFile;
   PVector position = new PVector(width/2, height/2);
-  float buttonSize = 64;
+  float buttonSize = 100;
   float hbuttonSize = 0.5 * buttonSize;
   
   SoundButton(String fileName) {

@@ -1,5 +1,6 @@
 import cassette.audiofiles.*;
 
+boolean isHomepage;
 boolean display;
 
 ArrayList<Page> pages;
@@ -21,6 +22,7 @@ void draw() {
 }
 
 void init() {
+  isHomepage = true;
   textAlign(LEFT, TOP);
   audioImg = loadImage("Audio.png");
   inProgressImg = loadImage("InProgress.png");
@@ -40,24 +42,24 @@ void disposePages() {
   for (Page p : pages) {
     p.dispose();
   }
+  
+  pages.clear();
 }
 
 void pause() {
   display = false;
   disposePages();
-}
-
-void reusme() {
   init();
   display = true;
 }
 
-void keyPressed() {
-  if (keyCode == BACK) {
+void onBackPressed() {
+  if (isHomepage) {
+    exit();
+  } else {
     display = false;
     disposePages();
     init();
     display = true;
-    keyCode = 1;
   }
 }

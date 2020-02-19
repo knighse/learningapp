@@ -6,7 +6,7 @@ class ColorLesson extends Lesson {
     soundButton = new SoundButton("Colors.wav");
     
     try {
-      loadStrings("colorLesson.txt");
+      progress = int(loadStrings("colorLesson.txt")[0]);
     } catch (Exception e) {
       //Progress is zero by default (it's in Lesson class)
       saveStrings("colorLesson.txt", new String[]{str(progress)});
