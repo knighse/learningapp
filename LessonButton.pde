@@ -39,9 +39,9 @@ class LessonButton {
     lesson.soundButton.display();
     
     if (lesson.finished) {
-      image(finishedImg, position.x + (hbuttonWidth - dpadding), position.y + (hbuttonHeight - dpadding), 64, 64);
+      image(finishedImg, position.x + (hbuttonWidth - 128), position.y + (hbuttonHeight - 128));
     } else if (lesson.inProgress) {
-      image(inProgressImg, position.x + (hbuttonWidth - dpadding), position.y + (hbuttonHeight - dpadding), 64, 64);
+      image(inProgressImg, position.x + (hbuttonWidth - 128), position.y + (hbuttonHeight - 128));
     }
     
     if (mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + (hbuttonWidth - lesson.soundButton.buttonSize) && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {

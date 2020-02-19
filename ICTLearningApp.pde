@@ -1,7 +1,10 @@
 import cassette.audiofiles.*;
 
+int devCounter = 0;
+
 boolean isHomepage;
 boolean display;
+boolean restartFlag = false;
 
 ArrayList<Page> pages;
 
@@ -17,8 +20,23 @@ void setup() {
 }
 
 void draw() {
+  if (restartFlag) {
+    display = false;
+    disposePages();
+    init();
+    display = true;
+    restartFlag = false;
+  }
+  
   background(255);
-  displayPages();
+  if (mousePressed && isHomepage && millis() < 5000) devCounter++;
+  if (devCounter > 300 && isHomepage && millis() < 5000) {
+    saveStrings("colorLesson.txt", new String[]{"0"});
+    background(0);
+    restart();
+  } else {
+    displayPages();
+  }
 }
 
 void init() {
@@ -47,19 +65,17 @@ void disposePages() {
 }
 
 void pause() {
-  display = false;
-  disposePages();
-  init();
-  display = true;
+  restart();
+}
+
+void restart() {
+  restartFlag = true;
 }
 
 void onBackPressed() {
   if (isHomepage) {
     exit();
   } else {
-    display = false;
-    disposePages();
-    init();
-    display = true;
+    restart();
   }
 }
