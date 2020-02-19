@@ -34,8 +34,8 @@ class LessonButton {
     
     image(lesson.icon, position.x + (hbuttonWidth - buttonHeight), position.y - hbuttonHeight, buttonHeight, buttonHeight);
     
-    lesson.soundButton.position.x = position.x + (hbuttonWidth + lesson.soundButton.hbuttonSize);
-    lesson.soundButton.position.y = position.y - (hbuttonHeight + lesson.soundButton.hbuttonSize);
+    lesson.soundButton.position.x = position.x + (hbuttonWidth - lesson.soundButton.hbuttonSize);
+    lesson.soundButton.position.y = position.y - (hbuttonHeight - lesson.soundButton.hbuttonSize);
     lesson.soundButton.display();
     
     if (lesson.finished) {
@@ -44,10 +44,15 @@ class LessonButton {
       image(inProgressImg, position.x + (hbuttonWidth - dpadding), position.y + (hbuttonHeight - dpadding), 64, 64);
     }
     
-    if (mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + hbuttonWidth && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {
+    if (mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + (hbuttonWidth - lesson.soundButton.buttonSize) && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {
       parent.shown = false;
+      lesson.soundButton.dispose();
       lesson.shown = true;
       isHomepage = false;
     }
+  }
+  
+  void dispose() {
+    lesson.soundButton.dispose();
   }
 }

@@ -13,6 +13,6 @@ class HomePage extends Page {
   }
   
   void dispose() {
-    
+    colorLessonBtn.dispose();
   }
 }

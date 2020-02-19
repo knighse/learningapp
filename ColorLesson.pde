@@ -19,5 +19,6 @@ class ColorLesson extends Lesson {
   
   void dispose() {
     saveStrings("colorLesson.txt", new String[]{str(progress)});
+    println("Save succesful");
   }
 }
