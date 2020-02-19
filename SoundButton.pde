@@ -14,10 +14,6 @@ class SoundButton {
   
   void display() {
     image(audioImg, position.x - hbuttonSize, position.y - hbuttonSize, buttonSize, buttonSize);
-    noFill();
-    strokeWeight(3);
-    stroke(0);
-    rect(position.x - hbuttonSize, position.y - hbuttonSize, buttonSize, buttonSize);
     
     if (mousePressed && mouseX > position.x - hbuttonSize && mouseX < position.x + hbuttonSize && mouseY > position.y - hbuttonSize && mouseY < position.y + hbuttonSize) {
       audioFile.play();

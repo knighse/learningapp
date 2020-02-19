@@ -44,7 +44,7 @@ class LessonButton {
       image(inProgressImg, position.x + (hbuttonWidth - 128), position.y + (hbuttonHeight - 128));
     }
     
-    if (mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + (hbuttonWidth - lesson.soundButton.buttonSize) && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {
+    if (!lesson.finished && mousePressed && mouseX > position.x - hbuttonWidth && mouseX < position.x + (hbuttonWidth - lesson.soundButton.buttonSize) && mouseY > position.y - hbuttonHeight && mouseY < position.y + hbuttonHeight) {
       parent.shown = false;
       lesson.soundButton.dispose();
       lesson.shown = true;

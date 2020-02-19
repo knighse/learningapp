@@ -2,6 +2,7 @@ import cassette.audiofiles.*;
 
 int devCounter = 0;
 
+boolean wipeData = false;
 boolean isHomepage;
 boolean display;
 boolean restartFlag = false;
@@ -26,12 +27,13 @@ void draw() {
     init();
     display = true;
     restartFlag = false;
+    wipeData = false;
   }
   
   background(255);
-  if (mousePressed && isHomepage && millis() < 5000) devCounter++;
-  if (devCounter > 300 && isHomepage && millis() < 5000) {
-    saveStrings("colorLesson.txt", new String[]{"0"});
+  if (mousePressed && isHomepage && millis() < 500) devCounter++;
+  if (devCounter > 50 && isHomepage && millis() < 500) {
+    wipeData = true;
     background(0);
     restart();
   } else {
