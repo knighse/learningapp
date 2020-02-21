@@ -31,8 +31,8 @@ void draw() {
   }
   
   background(255);
-  if (mousePressed && isHomepage && millis() < 500) devCounter++;
-  if (devCounter > 50 && isHomepage && millis() < 500) {
+  if (mousePressed && isHomepage && millis() < 2500) devCounter++;
+  if (devCounter > 50 && isHomepage && millis() < 2500) {
     wipeData = true;
     background(0);
     restart();
