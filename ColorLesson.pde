@@ -16,7 +16,7 @@ class ColorLesson extends Lesson {
   boolean justPressed = false;
   color flashColor;
   int flashTime = 0;
-  int maxLessons = 60;
+  int maxLessons = 20;
   
   SoundFile good;
   SoundFile bad;
@@ -51,13 +51,17 @@ class ColorLesson extends Lesson {
         finished = true;
       }
     } catch (Exception e) {
-      SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-      SharedPreferences.Editor editor = preferences.edit();
-      editor.putInt("ColorLesson",0);
-      editor.commit();
-      
-      progress = 0;
+      wipeProgress();
     }
+  }
+  
+  void wipeProgress() {
+    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+    SharedPreferences.Editor editor = preferences.edit();
+    editor.putInt("ColorLesson",0);
+    editor.commit();
+    
+    progress = 0;
   }
   
   void display() {
