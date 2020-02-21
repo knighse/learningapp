@@ -1,4 +1,4 @@
-class ColorLesson extends Lesson {
+class AnimalLesson extends Lesson {
   color[] colors = new color[]{color(0, 0, 255), color(0, 255, 0), color(255, 0, 0), color(100, 0, 155), color(255, 255, 0), color(255, 7, 255), color(255, 150, 0), color(150, 75, 0), color(0), color(250)};
   String[] names = new String[]{"Blue", "Green", "Red", "Purple", "Yellow", "Pink", "Orange", "Brown", "Black", "White"};
   //top = 0, middle = 1, bottom = 2
@@ -22,13 +22,13 @@ class ColorLesson extends Lesson {
   SoundFile bad;
   SoundFile finishedSound;
 
-  ColorLesson() {
+  AnimalLesson() {
     good = new SoundFile(applet, "Good.wav");
     bad = new SoundFile(applet, "Bad.wav");
     finishedSound = new SoundFile(applet, "Finished.wav");
 
-    name = "Color Spaceship";
-    desc = "Listen to the color's name and touch it. Get all of the colors right to launch!";
+    name = "Animal Spotter";
+    desc = "The animals have escaped! Listen to the sound and touch the animal that makes the sound to put them back in the zoo.";
     icon = loadImage("Colors.png");
     soundButton = new SoundButton("Colors.wav");
 
