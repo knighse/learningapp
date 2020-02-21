@@ -1,6 +1,7 @@
 import cassette.audiofiles.*;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
+import java.util.Arrays;
 
 int devCounter = 0;
 
@@ -16,6 +17,7 @@ PApplet applet = this;
 PImage audioImg;
 PImage inProgressImg;
 PImage finishedImg;
+PImage rocket;
 
 void setup() {
   size(displayWidth, displayHeight);
@@ -47,10 +49,10 @@ void draw() {
 
 void init() {
   isHomepage = true;
-  textAlign(LEFT, TOP);
   audioImg = loadImage("Audio.png");
   inProgressImg = loadImage("InProgress.png");
   finishedImg = loadImage("Finished.png");
+  rocket = loadImage("rocket.png");
   pages = new ArrayList();
   
   pages.add(new HomePage());

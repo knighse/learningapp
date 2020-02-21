@@ -19,6 +19,7 @@ class LessonButton {
   }
   
   void display() {
+    textAlign(LEFT, TOP);
     fill(0);
     roundRect((position.x - hbuttonWidth) - 3, (position.y - hbuttonHeight) - 3, buttonWidth + 6, buttonHeight + 6, 30);
     if (lesson.finished) {
