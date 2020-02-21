@@ -26,10 +26,13 @@ class HomePage extends Page {
   }
   
   void display() {
-    colorLessonBtn.display();
+    wordLessonBtn.display();
+    animalLessonBtn.display();
   }
   
   void dispose() {
+    wordLessonBtn.dispose();
+    animalLessonBtn.dispose();
     colorLessonBtn.dispose();
   }
 }
