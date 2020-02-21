@@ -16,11 +16,17 @@ class ColorLesson extends Lesson {
   boolean justPressed = false;
   color flashColor;
   int flashTime = 0;
+  int maxLessons = 60;
   
-  SoundFile good = new SoundFile(applet, "Good.wav");
-  SoundFile bad = new SoundFile(applet, "Bad.wav");
+  SoundFile good;
+  SoundFile bad;
+  SoundFile finishedSound;
   
   ColorLesson() {
+    good = new SoundFile(applet, "Good.wav");
+    bad = new SoundFile(applet, "Bad.wav");
+    finishedSound = new SoundFile(applet, "Finished.wav");
+    
     name = "Colors";
     desc = "Learn your colors with this exciting lesson about colors and their names! Listen to the color's name and tap on which one it is. How many can you get?";
     icon = loadImage("Colors.png");
@@ -41,7 +47,7 @@ class ColorLesson extends Lesson {
       if (progress > 0) {
         inProgress = true;
       }
-      if (progress > 30) {
+      if (progress > maxLessons) {
         finished = true;
       }
     } catch (Exception e) {
@@ -61,26 +67,31 @@ class ColorLesson extends Lesson {
       return;
     }
     
-    if (progress >= 30) {
+    if (progress > maxLessons) {
+      finishedSound.play();
       finished = true; 
       restart();
     }
     
-    image(rocket, (width / 2) - 256, (height / 30) * (30 - progress), 512, 512);
+    image(rocket, (width / 2) - 256, ((height / maxLessons) * (maxLessons - progress))-512, 512, 512);
     
     if ((!justPressed && mousePressed && (dist(mouseX, mouseY, top.x, top.y) < radius || dist(mouseX, mouseY, middle.x, middle.y) < radius || dist(mouseX, mouseY, bottom.x, bottom.y) < radius)) || correct == -1) {
       if (correct != -1) {
         if (dist(mouseX, mouseY, top.x, top.y) < radius && correct == 0) {
           progress++;
           flash(color(0,255,0),20);
+          good.play();
         } else if (dist(mouseX, mouseY, middle.x, middle.y) < radius && correct == 1) {
           progress++;
           flash(color(0,255,0),20);
+          good.play();
         } else if (dist(mouseX, mouseY, bottom.x, bottom.y) < radius && correct == 2) {
           progress++;
           flash(color(0,255,0),20);
+          good.play();
         } else {
           flash(color(255,0,0),20);
+          bad.play();
         }
       }
       
@@ -89,20 +100,25 @@ class ColorLesson extends Lesson {
       ccorrect = colors[index];
       nameToGuess = names[index];
       correct = round(random(0,2));
-      ArrayList<Integer> colorsAvailable = Arrays.asList(colors);
+      ArrayList<Integer> colorsAvailable = new ArrayList();
+      for (int n : colors) {
+        colorsAvailable.add(n);
+      }
+      colorsAvailable.remove(index);
+      
       if (correct == 0) {
         ctop = ccorrect;
-        cmiddle = colors[round(random(0, colors.length-1))];
-        cbottom = colors[round(random(0, colors.length-1))];
+        cmiddle = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
+        cbottom = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
       }
       if (correct == 1) {
-        ctop = colors[round(random(0, colors.length-1))];
         cmiddle = ccorrect;
-        cbottom = colors[round(random(0, colors.length-1))];
+        ctop = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
+        cbottom = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
       }
       if (correct == 2) {
-        ctop = colors[round(random(0, colors.length-1))];
-        cmiddle = colors[round(random(0, colors.length-1))];
+        ctop = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
+        cmiddle = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
         cbottom = ccorrect;
       }
       
@@ -110,7 +126,9 @@ class ColorLesson extends Lesson {
     }
     if (!mousePressed) justPressed = false;
     
-    stroke(0);
+    noStroke();
+    fill(255);
+    rect((width/2)-150, (height/8)-40, 300, 80);
     fill(0);
     textAlign(CENTER, CENTER);
     textSize(80);
@@ -132,6 +150,8 @@ class ColorLesson extends Lesson {
     editor.putInt("ColorLesson",progress);
     editor.commit();
     println("Save succesful");
+    good.stopPlayer();
+    bad.stopPlayer();
   }
   
   private void flash(color c, int time) {
