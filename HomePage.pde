@@ -6,6 +6,7 @@ class HomePage extends Page {
     colorLesson = new ColorLesson();
     pages.add(colorLesson);
     colorLessonBtn = new LessonButton(this, colorLesson);
+    colorLessonBtn.position.y = colorLessonBtn.padding + colorLessonBtn.hbuttonHeight + 50;
   }
   
   void display() {

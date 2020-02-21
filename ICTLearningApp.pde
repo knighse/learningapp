@@ -1,4 +1,6 @@
 import cassette.audiofiles.*;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 
 int devCounter = 0;
 
@@ -28,10 +30,12 @@ void draw() {
     display = true;
     restartFlag = false;
     wipeData = false;
+    devCounter = 0;
   }
   
   background(255);
   if (mousePressed && isHomepage && millis() < 2500) devCounter++;
+  if (!mousePressed && devCounter > 0) devCounter = 0;
   if (devCounter > 50 && isHomepage && millis() < 2500) {
     wipeData = true;
     background(0);
@@ -80,4 +84,25 @@ void onBackPressed() {
   } else {
     restart();
   }
+}
+
+void roundRect(float x, float y, float w, float h, float r) {
+  noStroke();
+  rectMode(CORNER);
+  
+  float  ax, ay, hr;
+  
+  ax=x+w-1;
+  ay=y+h-1;
+  hr = r/2;
+  
+  rect(x, y, w, h);
+  arc(x, y, r, r, radians(180.0), radians(270.0));
+  arc(ax, y, r,r, radians(270.0), radians(360.0));
+  arc(x, ay, r,r, radians(90.0), radians(180.0));
+  arc(ax, ay, r,r, radians(0.0), radians(90.0));
+  rect(x, y-hr, w, hr);
+  rect(x-hr, y, hr, h);
+  rect(x, y+h, w, hr);
+  rect(x+w,y,hr, h);
 }

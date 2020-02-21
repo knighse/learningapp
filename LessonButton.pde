@@ -1,11 +1,11 @@
 class LessonButton {
   PVector position = new PVector(width/2, height/2);
-  float padding = 10;
+  float padding = 60;
   float hpadding = padding * 0.5;
   float dpadding = padding * 2;
   float buttonWidth = displayWidth - dpadding;
   float hbuttonWidth = buttonWidth * 0.5;
-  float buttonHeight = 500;
+  float buttonHeight = 550;
   float hbuttonHeight = buttonHeight * 0.5;
   Page parent;
   Lesson lesson;
@@ -19,18 +19,22 @@ class LessonButton {
   }
   
   void display() {
-    noFill();
-    strokeWeight(3);
-    stroke(0);
-    rect(position.x - hbuttonWidth, position.y - hbuttonHeight, buttonWidth, buttonHeight);
+    fill(0);
+    roundRect((position.x - hbuttonWidth) - 3, (position.y - hbuttonHeight) - 3, buttonWidth + 6, buttonHeight + 6, 30);
+    if (lesson.finished) {
+      fill(200);
+    } else {
+      fill(255);
+    }
+    roundRect(position.x - hbuttonWidth, position.y - hbuttonHeight, buttonWidth, buttonHeight, 30);
     
     fill(0);
     stroke(0);
     strokeWeight(1);
-    textSize(80);
-    text(lesson.name, position.x - (hbuttonWidth - dpadding), position.y - (hbuttonHeight - dpadding));
-    textSize(50);
-    text(lesson.desc, position.x - (hbuttonWidth - dpadding), position.y - (hbuttonHeight - 100), buttonWidth - (buttonHeight + dpadding), buttonHeight - dpadding);
+    textSize(85);
+    text(lesson.name, position.x - (hbuttonWidth - hpadding), position.y - (hbuttonHeight - 5));
+    textSize(60);
+    text(lesson.desc, position.x - (hbuttonWidth - hpadding), position.y - (hbuttonHeight - 90), buttonWidth - (buttonHeight + padding), buttonHeight - padding);
     
     image(lesson.icon, position.x + (hbuttonWidth - buttonHeight), position.y - hbuttonHeight, buttonHeight, buttonHeight);
     
