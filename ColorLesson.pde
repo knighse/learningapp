@@ -1,5 +1,5 @@
 class ColorLesson extends Lesson {
-  color[] colors = new color[]{color(0, 0, 255), color(0, 255, 0), color(255, 0, 0), color(200, 0, 255), color(255, 255, 0), color(255, 0, 255), color(255, 150, 0), color(150, 75, 0), color(0), color(250)};
+  color[] colors = new color[]{color(0, 0, 255), color(0, 255, 0), color(255, 0, 0), color(100, 0, 155), color(255, 255, 0), color(255, 0, 255), color(255, 150, 0), color(255, 150, 0), color(0), color(250)};
   String[] names = new String[]{"Blue", "Green", "Red", "Purple", "Yellow", "Pink", "Orange", "Brown", "Black", "White"};
   //top = 0, middle = 1, bottom = 2
   String nameToGuess;
@@ -27,8 +27,8 @@ class ColorLesson extends Lesson {
     bad = new SoundFile(applet, "Bad.wav");
     finishedSound = new SoundFile(applet, "Finished.wav");
 
-    name = "Color Spaceship!";
-    desc = "Listen to the color's name and touch it. Get all of the colors right ";
+    name = "Color Spaceship";
+    desc = "Listen to the color's name and touch it. Get all of the colors right to launch!";
     icon = loadImage("Colors.png");
     soundButton = new SoundButton("Colors.wav");
 
@@ -85,6 +85,8 @@ class ColorLesson extends Lesson {
     image(rocket, (width / 2) - 256, ((height / maxLessons) * (maxLessons - progress))-512, 512, 512);
 
     if ((!justPressed && mousePressed && (dist(mouseX, mouseY, top.x, top.y) < radius || dist(mouseX, mouseY, middle.x, middle.y) < radius || dist(mouseX, mouseY, bottom.x, bottom.y) < radius)) || correct == -1) {
+      boolean firstRun = false;
+      
       if (correct != -1) {
         if (dist(mouseX, mouseY, top.x, top.y) < radius && correct == 0) {
           progress++;
@@ -102,6 +104,8 @@ class ColorLesson extends Lesson {
           flash(color(255, 0, 0));
           bad.play();
         }
+      } else {
+        firstRun = true;
       }
 
       justPressed = true;
@@ -129,6 +133,11 @@ class ColorLesson extends Lesson {
         ctop = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
         cmiddle = colorsAvailable.get(round(random(0, colorsAvailable.size()-1)));
         cbottom = ccorrect;
+      }
+      
+      if (firstRun) {
+        SoundFile f = new SoundFile(applet, nameToGuess + ".wav");
+        f.play();
       }
     }
     if (!mousePressed) justPressed = false;
