@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 int devCounter = 0;
 
+PImage logo;
+
 boolean wipeData = false;
 boolean isHomepage;
 boolean display;
@@ -30,7 +32,8 @@ void draw() {
     disposePages();
     init();
     display = true;
-    restartFlag = false;
+ 
+    ;restartFlag = false;
     wipeData = false;
     devCounter = 0;
   }
@@ -49,6 +52,7 @@ void draw() {
 
 void init() {
   isHomepage = true;
+  logo = loadImage("logo.png");
   audioImg = loadImage("Audio.png");
   inProgressImg = loadImage("InProgress.png");
   finishedImg = loadImage("Finished.png");

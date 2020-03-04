@@ -10,6 +10,7 @@ class HomePage extends Page {
   }
   
   void display() {
+    image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
     colorLessonBtn.display();
   }
   
